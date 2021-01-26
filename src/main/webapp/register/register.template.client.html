@@ -4,16 +4,22 @@
     <meta charset="UTF-8">
     <title>Register Page</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <link href="register.style.client.css" rel="stylesheet">
 </head>
 <body>
 <div class="container">
-    <h1>Sign Up</h1>
+    <h1>
+        Sign Up
+        <a class="btn pull-right" href="../index.html">
+            <i class="fa fa-times fa-fw"></i>
+        </a>
+    </h1>
     <form>
         <div class="form-group row">
             <label for="usernameFld"
                    class="col-sm-2 col-form-label">
-                Username:
+                Username
             </label>
             <div class="col-sm-10">
                 <input class="form-control"
@@ -24,7 +30,7 @@
         <div class="form-group row">
             <label for="passwordFld"
                    class="col-sm-2 col-form-label">
-                Password:
+                Password
             </label>
             <div class="col-sm-10">
                 <input class="form-control"
@@ -35,7 +41,7 @@
         <div class="form-group row">
             <label for="verifyPasswordFld"
                    class="col-sm-2 col-form-label">
-                Verify Password:
+                Verify Password
             </label>
             <div class="col-sm-10">
                 <input class="form-control"
@@ -48,10 +54,11 @@
                    class="col-sm-2 col-form-label">
             </label>
             <div class="col-sm-10">
-                <button class="btn btn-primary btn-block"
-                        id="registerBtn">
+                <a href="../profile/profile.template.client.html"
+                   class="btn btn-primary btn-block"
+                   id="registerBtn">
                     Sign Up
-                </button>
+                </a>
                 <div>
                     <a href="../login/login.template.client.html">
                         Login
