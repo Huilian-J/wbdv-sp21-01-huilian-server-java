@@ -6,24 +6,13 @@ var $lastnameFld
 var $roleFld
 var $updateBtn
 var $createBtn
-var addCourseBtn
-var theTableBody
+var $theTableBody
 
 var users = [
     {username: 'Ada0', password: 'Ada', firstname: 'Ada', lastname: 'ada', role: 'student'},
     {username: 'Ada1', password: 'Ada', firstname: 'Ada', lastname: 'ada', role: 'student'},
     {username: 'Ada2', password: 'Ada', firstname: 'Ada', lastname: 'ada', role: 'student'},
 ];
-
-// 'add user' btn, to be removed later
-function addUser() {
-    createUser({
-        username: 'newUser',
-        password: 'elsie000',
-        firstname: 'Huilian',
-        lastname: 'Jiang',
-        role: 'Admin'})
-}
 
 // create user function, re-render user list
 function createUser(user) {
@@ -33,23 +22,18 @@ function createUser(user) {
 
 //delete user function
 function deleteUser(event) {
-    console.log(event.target.id)
-    var deleteBtn = jQuery(event.target)
-    var theClass = deleteBtn.attr("class")
+    var deleteBtn = $(event.target)
     var theId = deleteBtn.attr("id")
     users.splice(theId, 1)
     renderUsers(users)
 }
 
-// create user example
-// createUser({username: 'Elsie', password: 'elsie000', firstname: 'Huilian', lastname: 'Jiang', role: 'Admin'})
-
 //render user list
 function renderUsers(users) {
-    theTableBody.empty()
+    $theTableBody.empty()
     for (var i = 0; i < users.length; i++) {
         var user = users[i]
-        theTableBody
+        $theTableBody
             .prepend(`<tr>
                     <td>${user.username}</td>
                     <td>${user.password}</td>
@@ -57,8 +41,12 @@ function renderUsers(users) {
                     <td>${user.lastname}</td>
                     <td>${user.role}</td>
                     <td>
-                        <button class="wbdv-delete" id="${i}">Delete</button>
-                        <button>Select</button>
+                        <a class="btn wbdv-delete" id="${i}">
+                            <i class="fa fa-times"></i>
+                        </a>
+                        <a class="btn wbdv-update" id="${i}">
+                            <i class="fas fa-pencil-alt"></i>
+                        </a>
                     </td>
                 </tr>`)
     }
@@ -66,7 +54,6 @@ function renderUsers(users) {
     jQuery(".wbdv-delete")
         .click(deleteUser)
 }
-
 
 function init() {
     $usernameFld = $(".wbdv-username-fld")
@@ -76,9 +63,7 @@ function init() {
     $roleFld = $(".wbdv-role-fld")
     $updateBtn = $(".wbdv-update-btn")
     $createBtn = $(".wbdv-create-btn")
-    addCourseBtn = jQuery("#wbdv-create-user")
-    addCourseBtn.click(addUser)
-    theTableBody = jQuery("tbody")
+    $theTableBody = $("tbody")
 
     // 'Create' button - create new user, empty fields afterward
     $createBtn.click(function() { // lambda function: 'function ()'  =  '() =>' and '{}' can be removed
