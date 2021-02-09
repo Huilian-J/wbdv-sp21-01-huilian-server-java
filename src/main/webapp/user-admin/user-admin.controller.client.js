@@ -15,6 +15,7 @@ var users = [
     {username: 'Ada2', password: 'Ada', firstname: 'Ada', lastname: 'ada', role: 'student'},
 ];
 
+// 'add user' btn, to be removed later
 function addUser() {
     createUser({
         username: 'newUser',
@@ -29,6 +30,17 @@ function createUser(user) {
     users.push(user)
     renderUsers(users)
 }
+
+//delete user function
+function deleteUser(event) {
+    console.log(event.target.id)
+    var deleteBtn = jQuery(event.target)
+    var theClass = deleteBtn.attr("class")
+    var theId = deleteBtn.attr("id")
+    users.splice(theId, 1)
+    renderUsers(users)
+}
+
 // create user example
 // createUser({username: 'Elsie', password: 'elsie000', firstname: 'Huilian', lastname: 'Jiang', role: 'Admin'})
 
@@ -50,15 +62,9 @@ function renderUsers(users) {
                     </td>
                 </tr>`)
     }
+    // delete
     jQuery(".wbdv-delete")
-        .click(function (event) {
-            console.log(event.target.id)
-            var deleteBtn = jQuery(event.target)
-            var theClass = deleteBtn.attr("class")
-            var theId = deleteBtn.attr("id")
-            users.splice(theId, 1)
-            renderUsers(users)
-        })
+        .click(deleteUser)
 }
 
 
