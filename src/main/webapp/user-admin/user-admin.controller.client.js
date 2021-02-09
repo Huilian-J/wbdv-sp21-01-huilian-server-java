@@ -1,8 +1,20 @@
-// alert("Welcome Alert")
-// console.log("console alert")
+// dom variables
+var $usernameFld
+var $passwordFld
+var $firstnameFld
+var $lastnameFld
+var $roleFld
+var $updateBtn
+var $createBtn
+var addCourseBtn
+var theTableBody
 
-//'Add user' Button
-var addCourseBtn = jQuery("#wbdv-create-user") // $ = jQuery
+var users = [
+    {username: 'Ada0', password: 'Ada', firstname: 'Ada', lastname: 'ada', role: 'student'},
+    {username: 'Ada1', password: 'Ada', firstname: 'Ada', lastname: 'ada', role: 'student'},
+    {username: 'Ada2', password: 'Ada', firstname: 'Ada', lastname: 'ada', role: 'student'},
+];
+
 function addUser() {
     createUser({
         username: 'newUser',
@@ -11,28 +23,6 @@ function addUser() {
         lastname: 'Jiang',
         role: 'Admin'})
 }
-addCourseBtn.click(addUser)
-var users = [
-    {username: 'Ada0', password: 'Ada', firstname: 'Ada', lastname: 'ada', role: 'student'},
-    {username: 'Ada1', password: 'Ada', firstname: 'Ada', lastname: 'ada', role: 'student'},
-    {username: 'Ada2', password: 'Ada', firstname: 'Ada', lastname: 'ada', role: 'student'},
-];
-
-// play with heading style
-var theHeading = jQuery("h1#h-heading")
-// theHeading.remove()
-theHeading.html("Changed")
-theHeading.css("background-color", "red")
-theHeading.css("color", "yellow")
-theHeading
-    .html("Changed")
-    .css("background-color", "blue")
-    .css("color", "red")
-    .append(" - add, remove courses!")
-    .append("<button>Go!</button>")
-console.log(theHeading)
-
-var theTableBody = jQuery("tbody")
 
 // create user function, re-render user list
 function createUser(user) {
@@ -40,7 +30,7 @@ function createUser(user) {
     renderUsers(users)
 }
 // create user example
-createUser({username: 'Elsie', password: 'elsie000', firstname: 'Huilian', lastname: 'Jiang', role: 'Admin'})
+// createUser({username: 'Elsie', password: 'elsie000', firstname: 'Huilian', lastname: 'Jiang', role: 'Admin'})
 
 //render user list
 function renderUsers(users) {
@@ -70,31 +60,38 @@ function renderUsers(users) {
             renderUsers(users)
         })
 }
-renderUsers(users)
 
-// dom variables
-var $usernameFld = $(".wbdv-username-fld")
-var $passwordFld = $(".wbdv-password-fld")
-var $firstnameFld = $(".wbdv-firstname-fld")
-var $lastnameFld = $(".wbdv-lastname-fld")
-var $roleFld = $(".wbdv-role-fld")
-var $updateBtn = $(".wbdv-update-btn")
-var $createBtn = $(".wbdv-create-btn")
 
-// 'Create' button - create new user, empty fields afterward
-$createBtn.click(function() { // lambda function: 'function ()'  =  '() =>' and '{}' can be removed
-    var newUser = {
-        username: $usernameFld.val(),
-        password: $passwordFld.val(),
-        firstname: $firstnameFld.val(),
-        lastname: $lastnameFld.val(),
-        role: $roleFld.val()
-    }
-    createUser(newUser)
-    //clearing fields
-    $usernameFld.val("")
-    $passwordFld.val("")
-    $firstnameFld.val("")
-    $lastnameFld.val("")
-    $roleFld.val("Faculty")
-})
+function init() {
+    $usernameFld = $(".wbdv-username-fld")
+    $passwordFld = $(".wbdv-password-fld")
+    $firstnameFld = $(".wbdv-firstname-fld")
+    $lastnameFld = $(".wbdv-lastname-fld")
+    $roleFld = $(".wbdv-role-fld")
+    $updateBtn = $(".wbdv-update-btn")
+    $createBtn = $(".wbdv-create-btn")
+    addCourseBtn = jQuery("#wbdv-create-user")
+    addCourseBtn.click(addUser)
+    theTableBody = jQuery("tbody")
+
+    // 'Create' button - create new user, empty fields afterward
+    $createBtn.click(function() { // lambda function: 'function ()'  =  '() =>' and '{}' can be removed
+        var newUser = {
+            username: $usernameFld.val(),
+            password: $passwordFld.val(),
+            firstname: $firstnameFld.val(),
+            lastname: $lastnameFld.val(),
+            role: $roleFld.val()
+        }
+        createUser(newUser)
+        //clearing fields
+        $usernameFld.val("")
+        $passwordFld.val("")
+        $firstnameFld.val("")
+        $lastnameFld.val("")
+        $roleFld.val("Faculty")
+    })
+
+    renderUsers(users)
+}
+jQuery(init)
