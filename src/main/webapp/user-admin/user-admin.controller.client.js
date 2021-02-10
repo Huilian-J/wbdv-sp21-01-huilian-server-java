@@ -7,26 +7,43 @@ var $roleFld
 var $updateBtn
 var $createBtn
 var $theTableBody
+var userService = new AdminUserServiceClient()
 
 var users = [
-    {username: 'Ada0', password: 'Ada', firstname: 'Ada', lastname: 'ada', role: 'student'},
-    {username: 'Ada1', password: 'Ada', firstname: 'Ada', lastname: 'ada', role: 'student'},
-    {username: 'Ada2', password: 'Ada', firstname: 'Ada', lastname: 'ada', role: 'student'},
+    // {username: 'Ada0', password: 'Ada', firstname: 'Ada', lastname: 'ada', role: 'student'},
+    // {username: 'Ada1', password: 'Ada', firstname: 'Ada', lastname: 'ada', role: 'student'},
+    // {username: 'Ada2', password: 'Ada', firstname: 'Ada', lastname: 'ada', role: 'student'},
 ];
 
 // create user function, re-render user list
 function createUser(user) {
-    users.push(user)
-    renderUsers(users)
+    userService.createUser(user)
+        .then(function(userResult) {
+            users.push(user)
+            renderUsers(users)
+        })
 }
 
 //delete user function
 function deleteUser(event) {
     var deleteBtn = $(event.target)
-    var theId = deleteBtn.attr("id")
-    users.splice(theId, 1)
-    renderUsers(users)
+    var theIndex = deleteBtn.attr("id")
+    var theId = users[theIndex]._id
+    userService.deleteUser(theId)
+        .then(function(status){
+            users.splice(theIndex, 1)
+            renderUsers(users)
+        })
+
 }
+
+//edit user function
+// function editUser(event) {
+//     var updateBtn = $(event.target)
+//     var theId = updateBtn.attr("id")
+//     users.splice(theId, 1)    //edit update!
+//     renderUsers(users)
+// }
 
 //render user list
 function renderUsers(users) {
@@ -41,17 +58,17 @@ function renderUsers(users) {
                     <td>${user.lastname}</td>
                     <td>${user.role}</td>
                     <td>
-                        <a class="btn wbdv-delete" id="${i}">
-                            <i class="fa fa-times"></i>
+                        <a class="btn wbdv-delete">
+                            <i class="fa fa-times" id="${i}"></i>
                         </a>
-                        <a class="btn wbdv-update" id="${i}">
-                            <i class="fas fa-pencil-alt"></i>
+                        <a class="btn wbdv-update">
+                            <i class="fas fa-pencil-alt" id="${i}"></i>
                         </a>
                     </td>
                 </tr>`)
     }
     // delete
-    jQuery(".wbdv-delete")
+    $(".wbdv-delete")
         .click(deleteUser)
 }
 
@@ -83,6 +100,11 @@ function init() {
         $roleFld.val("Faculty")
     })
 
-    renderUsers(users)
+    // renderUsers(users)
+    userService.findAllUsers()
+        .then(function(usersResult) {
+            users = usersResult
+            renderUsers(users)
+        })
 }
-jQuery(init)
+$(init)
