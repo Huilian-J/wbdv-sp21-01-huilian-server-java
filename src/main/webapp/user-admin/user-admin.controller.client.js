@@ -19,7 +19,7 @@ var users = [
 function createUser(user) {
     userService.createUser(user)
         .then(function(userResult) {
-            users.push(user)
+            users.push(userResult)
             renderUsers(users)
         })
 }
@@ -72,7 +72,7 @@ function renderUsers(users) {
     for (var i = 0; i < users.length; i++) {
         var user = users[i]
         $theTableBody
-            .prepend(`<tr>
+            .append(`<tr>
                     <td>${user.username}</td>
                     <td>${user.password}</td>
                     <td>${user.firstname}</td>
