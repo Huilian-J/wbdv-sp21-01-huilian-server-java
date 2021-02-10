@@ -25,10 +25,16 @@ function AdminUserServiceClient() {
 
     }
     function updateUser(userId, user) {
-
+        return fetch(`${self.url}/${userId}`,
+            {method: 'PUT',
+                headers: {'content-type': 'application/json'},
+                body: JSON.stringify(user)})
+            .then(function(response) {
+                return response.json()
+            })
     }
     function deleteUser(userId) {
         return fetch(`${self.url}/${userId}`,
-            {method:'DELETE'})
+            {method: 'DELETE'})
     }
 }

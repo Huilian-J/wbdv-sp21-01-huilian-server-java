@@ -37,15 +37,36 @@ function deleteUser(event) {
 
 }
 
-//edit user function
-// function editUser(event) {
-//     var updateBtn = $(event.target)
-//     var theId = updateBtn.attr("id")
-//     users.splice(theId, 1)    //edit update!
-//     renderUsers(users)
-// }
+// select user function
+var selectedUser = null
+function selectUser(event) {
+    var selectBtn = $(event.target)
+    var theId = selectBtn.attr("id")
+    selectedUser = users.find(user => user._id === theId)
+    $usernameFld.val(selectedUser.username)
+    $passwordFld.val(selectedUser.password)
+    $firstnameFld.val(selectedUser.firstname)
+    $lastnameFld.val(selectedUser.lastname)
+    $roleFld.val(selectedUser.role)
+}
 
-//render user list
+// update user function
+function updateUser() {
+    selectedUser.username = $usernameFld.val()
+    selectedUser.password = $passwordFld.val()
+    selectedUser.firstname = $firstnameFld.val()
+    selectedUser.lastname = $lastnameFld.val()
+    selectedUser.role = $roleFld.val()
+    userService.updateUser(selectedUser._id, selectedUser)
+        .then(function(status) {
+            var index = users.findIndex(user => user._id === selectedUser._id)
+            users[index] = selectedUser
+            renderUsers(users)
+            clearFlds()
+        })
+}
+
+// render user list
 function renderUsers(users) {
     $theTableBody.empty()
     for (var i = 0; i < users.length; i++) {
@@ -61,8 +82,8 @@ function renderUsers(users) {
                         <a class="btn wbdv-delete">
                             <i class="fa fa-times" id="${i}"></i>
                         </a>
-                        <a class="btn wbdv-update">
-                            <i class="fas fa-pencil-alt" id="${i}"></i>
+                        <a class="btn wbdv-select">
+                            <i class="fas fa-pencil-alt" id="${user._id}"></i>
                         </a>
                     </td>
                 </tr>`)
@@ -70,6 +91,17 @@ function renderUsers(users) {
     // delete
     $(".wbdv-delete")
         .click(deleteUser)
+    //update
+    $(".wbdv-select")
+        .click(selectUser)
+}
+
+function clearFlds() {
+    $usernameFld.val("")
+    $passwordFld.val("")
+    $firstnameFld.val("")
+    $lastnameFld.val("")
+    $roleFld.val("Faculty")
 }
 
 function init() {
@@ -82,6 +114,8 @@ function init() {
     $createBtn = $(".wbdv-create-btn")
     $theTableBody = $("tbody")
 
+    $updateBtn.click(updateUser)
+
     // 'Create' button - create new user, empty fields afterward
     $createBtn.click(function() { // lambda function: 'function ()'  =  '() =>' and '{}' can be removed
         var newUser = {
@@ -92,12 +126,7 @@ function init() {
             role: $roleFld.val()
         }
         createUser(newUser)
-        //clearing fields
-        $usernameFld.val("")
-        $passwordFld.val("")
-        $firstnameFld.val("")
-        $lastnameFld.val("")
-        $roleFld.val("Faculty")
+        clearFlds()
     })
 
     // renderUsers(users)
