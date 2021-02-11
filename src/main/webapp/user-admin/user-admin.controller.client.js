@@ -99,7 +99,7 @@ function clearFlds() {
     $roleFld.val("Faculty")
 }
 
-function init() {
+function main() {
     $usernameFld = $(".wbdv-username-fld")
     $passwordFld = $(".wbdv-password-fld")
     $firstnameFld = $(".wbdv-firstname-fld")
@@ -131,4 +131,4 @@ function init() {
             renderUsers(users)
         })
 }
-$(init)
+$(main)
