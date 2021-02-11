@@ -58,6 +58,7 @@ function updateUser() {
             users[index] = selectedUser
             renderUsers(users)
             clearFlds()
+            selectedUser = null
         })
 }
 
