@@ -9,11 +9,7 @@ var $createBtn
 var $theTableBody
 var userService = new AdminUserServiceClient()
 
-var users = [
-    // {username: 'Ada0', password: 'Ada', firstname: 'Ada', lastname: 'ada', role: 'student'},
-    // {username: 'Ada1', password: 'Ada', firstname: 'Ada', lastname: 'ada', role: 'student'},
-    // {username: 'Ada2', password: 'Ada', firstname: 'Ada', lastname: 'ada', role: 'student'},
-];
+var users = [];
 
 // create user function, re-render user list
 function createUser(user) {
@@ -34,7 +30,6 @@ function deleteUser(event) {
             users.splice(theIndex, 1)
             renderUsers(users)
         })
-
 }
 
 // select user function
@@ -74,7 +69,7 @@ function renderUsers(users) {
         $theTableBody
             .append(`<tr>
                     <td>${user.username}</td>
-                    <td>${user.password}</td>
+                    <td><a type="password" hidden>${user.password}</a></td>
                     <td>${user.firstname}</td>
                     <td>${user.lastname}</td>
                     <td>${user.role}</td>
