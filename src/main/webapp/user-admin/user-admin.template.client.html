@@ -25,23 +25,23 @@
                 <th>Role</th>
                 <th>&nbsp;</th>
             </tr>
-            <tr>
-                <th><input type="text" class="form-control wbdv-username-fld" placeholder="Username"/></th>
-                <th><input class="form-control wbdv-password-fld" placeholder="Password"/></th>
-                <th><input class="form-control wbdv-firstname-fld" placeholder="First Name"/></th>
-                <th><input class="form-control wbdv-lastname-fld" placeholder="Last Name"/></th>
+            <tr class="wbdv-form">
+                <th><input id="usernameFld" class="form-control wbdv-username-fld" placeholder="Username"/></th>
+                <th><input id="passwordFld" class="form-control wbdv-password-fld" placeholder="Password"/></th>
+                <th><input id="firstNameFld" class="form-control wbdv-firstname-fld" placeholder="First Name"/></th>
+                <th><input id="lastNameFld" class="form-control wbdv-lastname-fld" placeholder="Last Name"/></th>
                 <th>
-                    <select class="form-control wbdv-role-fld">
+                    <select id="roleFld" class="form-control wbdv-role-fld">
                         <option value="Faculty" selected>Faculty</option>
                         <option value="Student">Student</option>
                         <option value="Admin">Admin</option>
                     </select>
                 </th>
                 <th>
-                    <a class="btn wbdv-create-btn">
+                    <a class="btn wbdv-create">
                         <i class="fa fa-plus"></i>
                     </a>
-                    <a class="btn wbdv-update-btn">
+                    <a class="btn wbdv-update">
                         <i class="fas fa-check"></i>
                     </a>
                     <a class="btn">
@@ -50,8 +50,22 @@
                 </th>
             </tr>
             </thead>
-            <tbody>
-<!--                content from api-->
+            <tbody class="wbdv-tbody">
+                 <tr class="wbdv-template wbdv-user wbdv-hidden">
+                     <td class="wbdv-username">ada</td>
+                     <td>&nbsp;</td>
+                     <td class="wbdv-first-name">Ada</td>
+                     <td class="wbdv-last-name">Lovelace</td>
+                     <td class="wbdv-role">FACULTY</td>
+                     <td class="wbdv-actions">
+                         <a class="btn wbdv-remove">
+                             <i class="fa fa-times"></i>
+                         </a>
+                         <a class="btn wbdv-edit">
+                             <i class="fas fa-pencil-alt"></i>
+                         </a>
+                     </td>
+                 </tr>
             </tbody>
         </table>
     </div>

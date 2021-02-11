@@ -79,20 +79,20 @@ function renderUsers(users) {
                     <td>${user.lastname}</td>
                     <td>${user.role}</td>
                     <td>
-                        <a class="btn wbdv-delete">
+                        <a class="btn wbdv-remove">
                             <i class="fa fa-times" id="${i}"></i>
                         </a>
-                        <a class="btn wbdv-select">
+                        <a class="btn wbdv-edit">
                             <i class="fas fa-pencil-alt" id="${user._id}"></i>
                         </a>
                     </td>
                 </tr>`)
     }
     // delete
-    $(".wbdv-delete")
+    $(".wbdv-remove")
         .click(deleteUser)
     //update
-    $(".wbdv-select")
+    $(".wbdv-edit")
         .click(selectUser)
 }
 
@@ -110,8 +110,8 @@ function init() {
     $firstnameFld = $(".wbdv-firstname-fld")
     $lastnameFld = $(".wbdv-lastname-fld")
     $roleFld = $(".wbdv-role-fld")
-    $updateBtn = $(".wbdv-update-btn")
-    $createBtn = $(".wbdv-create-btn")
+    $updateBtn = $(".wbdv-update")
+    $createBtn = $(".wbdv-create")
     $theTableBody = $("tbody")
 
     $updateBtn.click(updateUser)
