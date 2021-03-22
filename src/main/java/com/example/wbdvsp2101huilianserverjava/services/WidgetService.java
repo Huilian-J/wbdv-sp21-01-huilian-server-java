@@ -4,6 +4,7 @@ import com.example.wbdvsp2101huilianserverjava.models.Widget;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -21,6 +22,12 @@ public class WidgetService {
         widgets.add(w3);
         widgets.add(w4);
         widgets.add(w5);
+    }
+    public Widget createWidgetForTopic(String topicId, Widget widget) {
+        widget.setTopicId(topicId);
+        widget.setId((new Date()).getTime());
+        widgets.add(widget);
+        return widget;
     }
     public List<Widget> findAllWidgets() {
         return widgets;
