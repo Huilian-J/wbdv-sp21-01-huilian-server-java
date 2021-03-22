@@ -23,8 +23,8 @@ public class WidgetService {
         widgets.add(w4);
         widgets.add(w5);
     }
-    public Widget createWidgetForTopic(String topicId, Widget widget) {
-        widget.setTopicId(topicId);
+    public Widget createWidget(String tid, Widget widget) {
+        widget.setTopicId(tid);
         widget.setId((new Date()).getTime());
         widgets.add(widget);
         return widget;
@@ -32,13 +32,43 @@ public class WidgetService {
     public List<Widget> findAllWidgets() {
         return widgets;
     }
-    public List<Widget> findWidgetsForTopic(String topicId) {
+    public List<Widget> findWidgetsForTopic(String tid) {
         List<Widget> ws = new ArrayList<Widget>();
         for(Widget w: widgets) {
-            if(w.getTopicId().equals(topicId)) {
+            if(w.getTopicId().equals(tid)) {
                 ws.add(w);
             }
         }
         return ws;
+    }
+    public Integer updateWidget(Long wid, Widget widget) {
+        int index = -1;
+        for(int i = 0; i < widgets.size(); i++) {
+            if(widgets.get(i).getId().equals(wid)) {
+                index = i;
+                widgets.set(i, widget);
+                return 1;
+            }
+        }
+        return -1;                                  
+    }
+    public Integer deleteWidget(Long wid) {
+        int index = -1;
+        for(int i = 0; i < widgets.size(); i++) {
+            if(widgets.get(i).getId().equals(wid)) {
+                index = i;
+                widgets.remove(index);
+                return 1;
+            }
+        }
+        return -1;
+    }
+    public Widget findWidgetById(Long wid) {
+        for(Widget w: widgets) {
+            if(w.getId().equals(wid)) {
+                return w;
+            }
+        }
+        return null;
     }
 }
