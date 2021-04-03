@@ -16,6 +16,7 @@ public class Widget {
     private String text;
 
     private String name;
+    private Boolean ordered;
     private Integer widgetOrder;
     private String src;
     private Integer width;
@@ -146,5 +147,13 @@ public class Widget {
 
     public void setValue(String value) {
         this.value = value;
+    }
+
+    public Boolean getOrdered() {
+        return ordered;
+    }
+
+    public void setOrdered(Boolean ordered) {
+        this.ordered = ordered;
     }
 }

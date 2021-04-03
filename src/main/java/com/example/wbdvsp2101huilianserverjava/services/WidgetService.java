@@ -26,12 +26,33 @@ public class WidgetService {
     }
     public Integer updateWidget(Long wid, Widget widget) {
         Widget originalWidget = repository.findById(wid).get();
-        // TODO: copy all the other fields testing for null
-        originalWidget.setId(widget.getId());
-        originalWidget.setTopicId(widget.getTopicId());
-        originalWidget.setType(widget.getType());
-        originalWidget.setSize(widget.getSize());
-        originalWidget.setText(widget.getText());
+        if(widget.getId() != null) {
+            originalWidget.setId(widget.getId());
+        }
+        if(widget.getTopicId() != null) {
+            originalWidget.setTopicId(widget.getTopicId());
+        }
+        if(widget.getType() != null) {
+            originalWidget.setType(widget.getType());
+        }
+        if(widget.getSize() != null) {
+            originalWidget.setSize(widget.getSize());
+        }
+        if(widget.getText() != null) {
+            originalWidget.setText(widget.getText());
+        }
+        if(widget.getSrc() != null) {
+            originalWidget.setSrc(widget.getSrc());
+        }
+        if(widget.getHeight() != null) {
+            originalWidget.setHeight(widget.getHeight());
+        }
+        if(widget.getWidth() != null) {
+            originalWidget.setWidth(widget.getWidth());
+        }
+        if(widget.getOrdered() != null) {
+            originalWidget.setOrdered(widget.getOrdered());
+        }
         repository.save(originalWidget);
         return 1;
     }
